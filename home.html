@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    
+    </head>
+
+
+<body>
+      <!-- const eventSchema = mongoose.Schema({
+          eventName: String,
+          eventdate:String,
+          clubName:String,
+          venue: String,
+          expectedAudience:Number,
+          cordinatorName:String,
+          cordinatorNo:Number,
+          
+      }); -->
+      
+      <div>
+           
+        <form id="userform">
+          <div class="mb-3">
+            <label for="eventName" class="form-label">EventName</label>
+            <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">WRITE NAME OF YOUR EVENT</div>
+          </div>
+          
+          
+          <div class="mb-3">
+            <label for="eventDate" class="form-label">EventDate</label>
+            <input type="date" class="form-control" name="eventDate">
+          </div>
+          
+          
+          <div class="mb-3">
+              <label for="clubName" class="form-label">ClubName</label>
+              <input type="text" class="form-control" name="clubName" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">WRITE NAME OF YOUR CLUB</div>
+            </div>
+            
+            
+            <div class="mb-3">
+              <label for="venue" class="form-label">Venue</label>
+              <input type="text" class="form-control" name="venue" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">WRITE REQUESTED VENUE FOR EVENT</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="expectedAudience" class="form-label">ExpectedAudience</label>
+              <input type="number" class="form-control" name="expectedAudience" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text"></div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="cordinatorName" class="form-label">CordinatorName</label>
+              <input type="text" class="form-control" name="cordinatorName" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">WRITE NAME OF YOUR Cordinator</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="cordinatorNo" class="form-label">CordinatorNo.</label>
+              <input type="number" class="form-control" name="cordinatorNo" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">CONTACT DETAILS OF THE CORDINATORS</div>
+            </div>
+            
+            <button type="submit"  class="btn btn-primary">Submit</button>
+          </form>
+          
+        <button id="show" onclick="showUsers()" type="submit">show users</button>
+        
+      </div>
+         <script>
+            
+                const form = document.getElementById("userform");
+          const but = document.getElementById("show");
+          const users = document.getElementById("users");
+          
+          
+      
+          form.addEventListener("submit", (event) => {
+              event.preventDefault();
+      
+              const fdata = new FormData(form);
+      
+              eventName = fdata.get("eventName");
+              eventDate = fdata.get("eventDate");
+              clubName = fdata.get("clubName");
+              venue = fdata.get("venue");
+              expectedAudience = fdata.get("expectedAudience");
+              cordinatorName = fdata.get("cordinatorName");
+              cordinatorNo = fdata.get("cordinatorNo");
+              console.log(eventName)
+      
+              
+      
+              
+              // add user
+              data = {
+                "eventName": eventName,
+                "eventDate": eventDate,
+                "clubName": clubName,
+                "venue": venue,
+                "expectedAudience": expectedAudience,
+                "cordinatorName": cordinatorName,
+                "cordinatorNo": cordinatorNo,
+                
+                 
+              }
+      
+              fetch("http://localhost:3000/events", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(data)
+              }).then((response) => response.json())
+                  .then((data) => {
+                      console.log(data);
+                  });
+          })
+            
+         
+      
+          // const showUsers = () => {
+          //     window.location.href = "http://localhost:3000/getEvent"
+          // }
+
+          function showUsers(){
+            console.log("kjbnd;kajbdkj;ab")
+            fetch("http://localhost:3000/getEvent", {
+                  method: "GET",
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                
+              }).then((response) => response.json())
+                  .then((data) => {
+                      console.log(data);
+              });
+          }
+      </script> 
+      
+      
+        
+</body>
+</html>
